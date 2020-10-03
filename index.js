@@ -6,8 +6,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 async function createReadMe() {
     try {
-        const response = await getUserInput.promptUser();
-        console.log(response);
+        const response = await getUserInput.promptUserGitHub();
         const readme = createReadmeFile.createReadme(response);
         await writeFileAsync("readme.md", readme, "utf8");
         console.log("Successfully generated the readme file.");

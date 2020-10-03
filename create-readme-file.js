@@ -1,9 +1,8 @@
 function createReadme(userInput) {
-    let readme =
-        `# ${userInput.reponame}
-[![license](https://img.shields.io/github/license/${userInput.gitUserName}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.gitUserName}/${userInput.reponame}/blob/master/LICENSE)
+    let readme = `# ${userInput.reponame}
+[![license](https://img.shields.io/github/license/${userInput.username}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.username}/${userInput.reponame}/blob/master/LICENSE)
 
-${userInput.shortDescription}
+${userInput.Description}
 
 ## Table of Contents
 * [Installation](#Installation)
@@ -14,29 +13,29 @@ ${userInput.shortDescription}
 * [Questions](#Questions)
 
 ## Installation
-${userInput.installation}
+${userInput.Installation}
 
 ## Usage
-${userInput.usage}
+${userInput.Usage}
 
 ## License
-${userInput.license}
+${userInput.License}
 
-[![license](https://img.shields.io/github/license/${userInput.gitUserName}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.gitUserName}/${userInput.reponame}/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/${userInput.user}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.user}/${userInput.reponame}/blob/master/LICENSE)
 
 ## Contributing
-${userInput.contributing}`;
-    if (userInput.contributingBadge === "yes") {
-        readme += `\n[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)`;
-    }
-    readme += `## Tests
-${userInput.tests}
+${userInput.Contributing}
+
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+
+## Tests
+${userInput.Tests}
 
 ## Questions
-* Follow me at: <a href="https://github.com/${userInput.gitUserName}" target="_blank">https://github.com/${userInput.gitUserName}</a>
-* Please email with any question at: ${userInput.emailAddress}
+* Follow me at: <a href="https://github.com/${userInput.username}" target="_blank">https://github.com/${userInput.username}</a>
+* Please email with any question at: ${userInput.email}
 
-© 2019 ${userInput.gitUserName}`;
+© 2019 ${userInput.username}`;
     return readme;
 }
 
@@ -45,3 +44,9 @@ module.exports = {
         return createReadme(userInput);
     },
 };
+
+// ;
+//     if (userInput.contributingBadge === "yes") {
+//         readme += `\n[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)`;
+//     }
+//     readme += 
