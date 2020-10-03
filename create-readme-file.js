@@ -1,6 +1,8 @@
 function createReadme(userInput) {
-    const readme =
+    let readme =
         `# ${userInput.reponame}
+[![license](https://img.shields.io/github/license/${userInput.gitUserName}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.gitUserName}/${userInput.reponame}/blob/master/LICENSE)
+
 ${userInput.shortDescription}
 
 ## Table of Contents
@@ -14,28 +16,27 @@ ${userInput.shortDescription}
 ## Installation
 ${userInput.installation}
 
-### Technologies Utilized
-${userInput.technologiesutilized}
-
 ## Usage
 ${userInput.usage}
-
-### Description
-${userInput.longDescription}
 
 ## License
 ${userInput.license}
 
-## Contributing
-${userInput.contributing}
+[![license](https://img.shields.io/github/license/${userInput.gitUserName}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.gitUserName}/${userInput.reponame}/blob/master/LICENSE)
 
-## Tests
+## Contributing
+${userInput.contributing}`;
+    if (userInput.contributingBadge === "yes") {
+        readme += `\n[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)`;
+    }
+    readme += `## Tests
 ${userInput.tests}
 
 ## Questions
-* Please contact me at: ${userInput.emailAddress}
+* Follow me at: <a href="https://github.com/${userInput.gitUserName}" target="_blank">https://github.com/${userInput.gitUserName}</a>
+* Please email with any question at: ${userInput.emailAddress}
 
-© 2019 ${userInput.yourName}`;
+© 2019 ${userInput.gitUserName}`;
     return readme;
 }
 

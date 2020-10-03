@@ -38,3 +38,5 @@ Go the extra mile and write tests for your application. Then provide examples on
 * Please contact me at: chris.j.mckeown@hotmail.com
 
 © 2019 Chris Mckeown
+
+[![license](https://img.shields.io/github/license/chrisjmckeown/Awesome_Readme_Generator.svg?style=flat-square)](https://github.com/chrisjmckeown/Awesome_Readme_Generator/blob/master/LICENSE)
