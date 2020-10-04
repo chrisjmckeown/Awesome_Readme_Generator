@@ -31,6 +31,16 @@ function promptEmail() {
     ]);
 }
 
+function promptOutputPath() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "Please enter output path (optional):",
+            name: "outputPath"
+        }
+    ]);
+}
+
 function promptRepo(repoNames) {
     return inquirer.prompt([
         {
@@ -81,12 +91,15 @@ async function promptUserGitHub() {
         const { reponame } = await promptRepo(repoNames);
         // prompt user for sections to create, may not want each section all the time
         const readmeOptional = await promptReadmeOptional();
+        // prompt user for sections to create, may not want each section all the time
+        const { outputPath } = await promptOutputPath();
         // combined list of readme for creations
         const readmeSections = ["Description", ...readmeOptional.readmeOptional];
         const userInput = {
             reponame: reponame,
             email: email,
-            username: username
+            username: username,
+            outputPath: outputPath
         }
         if (readmeSections.includes("Description")) {
             const { answer } = await promptInputs("Please enter eye catching description:");
