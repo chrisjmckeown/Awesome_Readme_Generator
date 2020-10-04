@@ -1,42 +1,12 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
 
-function promptInputs(question) {
+function promptInput(question) {
     return inquirer.prompt([
         {
             type: "input",
             message: `${question}`,
             name: "answer"
-        }
-    ]);
-}
-
-function promptUserName() {
-    return inquirer.prompt([
-        {
-            type: "input",
-            message: "Please enter your GitHub username:",
-            name: "username"
-        }
-    ]);
-}
-
-function promptEmail() {
-    return inquirer.prompt([
-        {
-            type: "input",
-            message: "Please enter your email address:",
-            name: "email"
-        }
-    ]);
-}
-
-function promptOutputPath() {
-    return inquirer.prompt([
-        {
-            type: "input",
-            message: "Please enter output path (optional):",
-            name: "outputPath"
         }
     ]);
 }
@@ -74,6 +44,7 @@ function promptReadmeOptional() {
 async function promptUserGitHub() {
     // prompt for user git hub name
     const { username } = await promptUserName();
+    const { answer: username } = await promptInput("Please enter your GitHub username:");
     var email = "";
     // use the git repos and email to reduce user inputs and focus on created repos
     try {
@@ -85,6 +56,7 @@ async function promptUserGitHub() {
         // only public email address are avaliable via git api, although found even though me email is public, it still came back null
         if (!email) {
             var { email } = await promptEmail();
+            var { answer: email } = await promptInput("Please enter your email address:");
         }
         // extract only the repo name to a list and prompt user for the repo to create the readme for
         const repoNames = responseRepos.data.map(repo => repo.name);
@@ -92,7 +64,7 @@ async function promptUserGitHub() {
         // prompt user for sections to create, may not want each section all the time
         const readmeOptional = await promptReadmeOptional();
         // prompt user for sections to create, may not want each section all the time
-        const { outputPath } = await promptOutputPath();
+        const { answer: outputPath } = await promptInput("Please enter output path (optional):");
         // combined list of readme for creations
         const readmeSections = ["Description", ...readmeOptional.readmeOptional];
         const userInput = {
@@ -102,27 +74,27 @@ async function promptUserGitHub() {
             outputPath: outputPath
         }
         if (readmeSections.includes("Description")) {
-            const { answer } = await promptInputs("Please enter eye catching description:");
+            const { answer } = await promptInput("Please enter eye catching description:");
             userInput.Description = answer;
         }
         if (readmeSections.includes("Installation")) {
-            const { answer } = await promptInputs("Please enter steps required to install the project:");
+            const { answer } = await promptInput("Please enter steps required to install the project:");
             userInput.Installation = answer;
         }
         if (readmeSections.includes("Usage")) {
-            const { answer } = await promptInputs("Please enter instructions and examples for use:");
+            const { answer } = await promptInput("Please enter instructions and examples for use:");
             userInput.Usage = answer;
         }
         if (readmeSections.includes("License")) {
-            const { answer } = await promptInputs("Please enter additional licensing infor (a Badge will be displayed by default):");
+            const { answer } = await promptInput("Please enter additional licensing infor (a Badge will be displayed by default):");
             userInput.License = answer + " "; //spaced added to ensure this section is created.
         }
         if (readmeSections.includes("Contributing")) {
-            const { answer } = await promptInputs("Please enter additional contributing guidelines (a Conventry Badge will be displayed by default):");
+            const { answer } = await promptInput("Please enter additional contributing guidelines (a Conventry Badge will be displayed by default):");
             userInput.Contributing = answer + " "; //spaced added to ensure this section is created.
         }
         if (readmeSections.includes("Tests")) {
-            const { answer } = await promptInputs("Please enter tests for the application and how to run:");
+            const { answer } = await promptInput("Please enter tests for the application and how to run:");
             userInput.Tests = answer;
         }
         return userInput;
