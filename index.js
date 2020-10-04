@@ -20,14 +20,14 @@ async function createReadMe() {
         if (response) {
             const readme = createReadmeFile.createReadme(response);
             if (folderExists(response.outputPath)) {
-                await writeFileAsync(path.join(response.outputPath, "readme.md"), readme, "utf8");
-                console.log("Path found: ", response.outputPath);
+                const outputPath = path.join(response.outputPath, "readme.md");
+                await writeFileAsync(outputPath, readme, "utf8");
+                console.log(`Successfully generated the readme file. \nSee here: ${outputPath}`);
             }
             else {
                 await writeFileAsync("readme.md", readme, "utf8");
-                console.log("Path not found.");
+                console.log("Successfully generated the readme file.");
             }
-            console.log("Successfully generated the readme file.");
         }
     } catch (err) {
         console.log("Error generating the readme file.", err);
