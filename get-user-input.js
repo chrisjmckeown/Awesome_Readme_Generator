@@ -24,6 +24,23 @@ function promptRepo(repoNames) {
     ]);
 }
 
+// function promptPath(){
+//     return inquirer.prompt([
+//         {
+//           type: 'fuzzypath',
+//           name: 'answer',
+//           excludePath: nodePath => nodePath.startsWith('node_modules'),
+//           excludeFilter: nodePath => nodePath == '.',
+//           itemType: 'any',
+//           rootPath: 'app',
+//           message: 'Select a target directory for your component:',
+//           default: 'c:/',
+//           suggestOnly: false,
+//           depthLimit: 5,
+//         }
+//       ]);
+// }
+
 function promptReadmeOptional() {
     return inquirer.prompt([
         {
@@ -61,8 +78,8 @@ async function promptUserGitHub() {
         const { reponame } = await promptRepo(repoNames);
         // prompt user for sections to create, may not want each section all the time
         const readmeOptional = await promptReadmeOptional();
-        // prompt user for sections to create, may not want each section all the time
-        const { answer: outputPath } = await promptInput("Please enter output path (optional):");
+        // prompt for path to place the readme file. Could use fuzzy path...
+        const { answer: outputPath } = await promptInput("Please enter output path (optional):");//promptPath();//
         // combined list of readme for creations
         const readmeSections = ["Description", ...readmeOptional.readmeOptional];
         const userInput = {

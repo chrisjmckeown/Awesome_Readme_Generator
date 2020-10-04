@@ -4,16 +4,24 @@ const fs = require('fs');
 const util = require('util');
 const path = require('path');
 const writeFileAsync = util.promisify(fs.writeFile);
-const folderExistsAsync = util.promisify(fs.stat);
+const folderExistsAsync = util.promisify(fs.lstatSync);
+
+function folderExists(outputPath) {
+    try {
+        return fs.lstatSync(outputPath).isDirectory();
+    } catch (_) {
+        return false;
+    }
+}
 
 async function createReadMe() {
     try {
         const response = await getUserInput.promptUserGitHub();
         if (response) {
             const readme = createReadmeFile.createReadme(response);
-            if (response.outputPath && await folderExistsAsync(response.outputPath)) {
+            if (folderExists(response.outputPath)) {
                 await writeFileAsync(path.join(response.outputPath, "readme.md"), readme, "utf8");
-                console.log("Path found.");
+                console.log("Path found: ", response.outputPath);
             }
             else {
                 await writeFileAsync("readme.md", readme, "utf8");
