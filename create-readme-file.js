@@ -3,7 +3,7 @@ function createReadmeBody(userInput) {
     let readme = "";
     if (userInput.Installation) readme += `\n\n## Installation\n${userInput.Installation}`;
     if (userInput.Usage) readme += `\n\n## Usage\n${userInput.Usage}`;
-    if (userInput.License) readme += `\n\n## License\n${userInput.License}\n[![license](https://img.shields.io/github/license/${userInput.user}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.user}/${userInput.reponame}/blob/master/LICENSE)`;
+    if (userInput.License) readme += `\n\n## License\n${userInput.License}\n[![license](https://img.shields.io/github/license/${userInput.username}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.username}/${userInput.reponame}/blob/master/LICENSE)`;
     if (userInput.Contributing) readme += `\n\n## Contributing\n${userInput.Contributing}\n[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)`;
     if (userInput.Tests) readme += `\n\n## Tests\n${userInput.Tests}`;
     return readme;
@@ -13,6 +13,7 @@ function createReadmeHeader(userInput) {
     // build the title, license and description
     let readme = `# ${userInput.reponame}
     \n[![license](https://img.shields.io/github/license/${userInput.username}/${userInput.reponame}.svg?style=flat-square)](https://github.com/${userInput.username}/${userInput.reponame}/blob/master/LICENSE)
+    \n## Description
     \n${userInput.Description}
     \n## Table of Contents`;
     // build the table of contents to match the use input.
