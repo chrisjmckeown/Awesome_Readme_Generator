@@ -43,7 +43,6 @@ function promptReadmeOptional() {
 
 async function promptUserGitHub() {
     // prompt for user git hub name
-    const { username } = await promptUserName();
     const { answer: username } = await promptInput("Please enter your GitHub username:");
     var email = "";
     // use the git repos and email to reduce user inputs and focus on created repos

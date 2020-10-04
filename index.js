@@ -11,7 +11,7 @@ async function createReadMe() {
         const response = await getUserInput.promptUserGitHub();
         if (response) {
             const readme = createReadmeFile.createReadme(response);
-            if (await folderExistsAsync(response.outputPath)) {
+            if (response.outputPath && await folderExistsAsync(response.outputPath)) {
                 await writeFileAsync(path.join(response.outputPath, "readme.md"), readme, "utf8");
                 console.log("Path found.");
             }
