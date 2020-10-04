@@ -55,7 +55,6 @@ async function promptUserGitHub() {
         var { email } = responseUser;
         // only public email address are avaliable via git api, although found even though me email is public, it still came back null
         if (!email) {
-            var { email } = await promptEmail();
             var { answer: email } = await promptInput("Please enter your email address:");
         }
         // extract only the repo name to a list and prompt user for the repo to create the readme for
