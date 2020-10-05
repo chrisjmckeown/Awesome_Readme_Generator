@@ -1,21 +1,53 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
 
-function promptInput(question) {
+async function getInput(question) {
+    const { answer } = await promptInputQuestion(question);
+    if (answer) {
+        const { answer } = await promptInputEditor();
+        return answer + " ";
+    }
+    else {
+        const { answer } = await promptInput();
+        return answer + " ";
+    }
+}
+
+function promptInputQuestion(question) {
+    return inquirer.prompt([
+        {
+            type: "confirm",
+            message: `${question} Mult-line(y) Single-line (n)`,
+            name: "answer",
+        }
+    ]);
+}
+
+function promptInput() {
     return inquirer.prompt([
         {
             type: "input",
-            message: `${question}`,
+            message: "Input:",
             name: "answer"
         }
     ]);
 }
 
-function promptInputEditor(question) {
+function promptInputMessage(mesage) {
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: mesage,
+            name: "answer"
+        }
+    ]);
+}
+
+function promptInputEditor() {
     return inquirer.prompt([
         {
             type: "editor",
-            message: `${question}`,
+            message: "Input:",
             name: "answer"
         }
     ]);
@@ -51,20 +83,42 @@ function promptReadmeOptional() {
     ]);
 }
 
-async function promptUserGitHub() {
-    // prompt for user git hub name
-    const { answer: username } = await promptInput("Please enter your GitHub username:");
-    var email = "";
-    // use the git repos and email to reduce user inputs and focus on created repos
+async function promptUserReposByName(username) {
     try {
         const queryUrlRepos = `https://api.github.com/users/${username}/repos`;
         const responseRepos = await axios.get(queryUrlRepos);
+        return responseRepos;
+    }
+    catch (err) {
+        console.log("GitHub user repos: ", err.response.statusText);
+        return;
+    }
+}
+
+async function promptUserEmailByName(username) {
+    try {
         const queryUrlUser = `https://api.github.com/users/${username}`;
         const responseUser = await axios.get(queryUrlUser);
-        var { email } = responseUser;
+        return responseUser.email;
+    }
+    catch (err) {
+        console.log("GitHub user email: ", err.response.statusText);
+        return;
+    }
+}
+
+async function promptUserGitHub() {
+    // prompt for user git hub name
+    const { answer: username } = await promptInputMessage("Please enter your GitHub username:");
+    // use the git repos and email to reduce user inputs and focus on created repos
+    try {
+        const responseRepos = await promptUserReposByName(username);
+        if (!responseRepos) return;
+        const responseEmail = await promptUserEmailByName(username)
+        var email = responseEmail;
         // only public email address are avaliable via git api, although found even though me email is public, it still came back null
         if (!email) {
-            var { answer: email } = await promptInput("Please enter your email address:");
+            var { answer: email } = await promptInputMessage("Please enter your email address:");
         }
         // extract only the repo name to a list and prompt user for the repo to create the readme for
         const repoNames = responseRepos.data.map(repo => repo.name);
@@ -72,7 +126,7 @@ async function promptUserGitHub() {
         // prompt user for sections to create, may not want each section all the time
         const readmeOptional = await promptReadmeOptional();
         // prompt for path to place the readme file.
-        const { answer: outputPath } = await promptInput("Please enter output path (optional):");
+        const { answer: outputPath } = await promptInputMessage("Please enter output path (optional):");
         // combined list of readme for creations
         const readmeSections = ["Description", ...readmeOptional.readmeOptional];
         const userInput = {
@@ -82,33 +136,28 @@ async function promptUserGitHub() {
             outputPath: outputPath
         }
         if (readmeSections.includes("Description")) {
-            const { answer } = await promptInputEditor("Please enter eye catching description:");
-            userInput.Description = answer + " "; 
+            userInput.Description = await getInput("Please enter eye catching description:")
         }
         if (readmeSections.includes("Installation")) {
-            const { answer } = await promptInputEditor("Please enter steps required to install the project:");
-            userInput.Installation = answer + " ";
+            userInput.Installation = await getInput("Please enter steps required to install the project:")
         }
         if (readmeSections.includes("Usage")) {
-            const { answer } = await promptInputEditor("Please enter instructions and examples for use:");
+            userInput.Usage = await getInput("Please enter instructions and examples for use:");
             userInput.Usage = answer + " ";
         }
         if (readmeSections.includes("License")) {
-            const { answer } = await promptInputEditor("Please enter additional licensing infor (a Badge will be displayed by default):");
-            userInput.License = answer + " ";
+            userInput.License = await getInput("Please enter additional licensing infor (a Badge will be displayed by default):");
         }
         if (readmeSections.includes("Contributing")) {
-            const { answer } = await promptInputEditor("Please enter additional contributing guidelines (a Conventry Badge will be displayed by default):");
-            userInput.Contributing = answer + " ";
+            userInput.Contributing = await getInput("Please enter additional contributing guidelines (a Conventry Badge will be displayed by default):");
         }
         if (readmeSections.includes("Tests")) {
-            const { answer } = await promptInputEditor("Please enter tests for the application and how to run:");
-            userInput.Tests = answer + " ";
+            userInput.Tests = await getInput("Please enter tests for the application and how to run:");
         }
         return userInput;
     }
     catch (err) {
-        console.log("GitHub user name: ", err.response.statusText);
+        console.log("Failed to get user inputs: ", err);
         return;
     }
 }
