@@ -4,11 +4,11 @@ const axios = require("axios");
 async function getInput(question) {
     const { answer } = await promptInputQuestion(question);
     if (answer) {
-        const { answer } = await promptInputEditor();
+        const { answer } = await promptInput();
         return answer + " ";
     }
     else {
-        const { answer } = await promptInput();
+        const { answer } = await promptInputEditor();
         return answer + " ";
     }
 }
@@ -17,7 +17,7 @@ function promptInputQuestion(question) {
     return inquirer.prompt([
         {
             type: "confirm",
-            message: `${question} Mult-line(y) Single-line (n)`,
+            message: `${question} Single-line (y) Mult-line(n) `,
             name: "answer",
         }
     ]);
@@ -27,7 +27,17 @@ function promptInput() {
     return inquirer.prompt([
         {
             type: "input",
-            message: "Input:",
+            message: "Command line input...",
+            name: "answer"
+        }
+    ]);
+}
+
+function promptInputEditor() {
+    return inquirer.prompt([
+        {
+            type: "editor",
+            message: "Text editor input...",
             name: "answer"
         }
     ]);
@@ -38,16 +48,6 @@ function promptInputMessage(mesage) {
         {
             type: "input",
             message: mesage,
-            name: "answer"
-        }
-    ]);
-}
-
-function promptInputEditor() {
-    return inquirer.prompt([
-        {
-            type: "editor",
-            message: "Input:",
             name: "answer"
         }
     ]);
@@ -143,7 +143,6 @@ async function promptUserGitHub() {
         }
         if (readmeSections.includes("Usage")) {
             userInput.Usage = await getInput("Please enter instructions and examples for use:");
-            userInput.Usage = answer + " ";
         }
         if (readmeSections.includes("License")) {
             userInput.License = await getInput("Please enter additional licensing infor (a Badge will be displayed by default):");

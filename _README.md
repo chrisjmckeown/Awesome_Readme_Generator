@@ -45,6 +45,7 @@ Once installed:
     * Optional sections:
         * Installation, Usage, License, Contributing, and Tests
 * When prompted enter the required information
+    * When prompted enter (y) to enter text at the command line or (n) for multi-line and a text editor will open to receive text
 * Once created open the file and make any required modifications, i.e. adding images and personal styling requirements.
 
 ## License
