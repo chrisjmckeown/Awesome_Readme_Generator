@@ -9,18 +9,8 @@ function promptMulti() {
         }
     ]);
 }
-function prompt() {
+function promptSingle() {
     return inquirer.prompt([
-        {
-            type: "editor",
-            message: "Text editor input...",
-            name: "multline"
-        },
-        {
-            type: "input",
-            message: "Command line input...",
-            name: "single"
-        },
         {
             type: "input",
             message: "Command line input...",
