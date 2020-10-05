@@ -11,6 +11,16 @@ function promptInput(question) {
     ]);
 }
 
+function promptInputEditor(question) {
+    return inquirer.prompt([
+        {
+            type: "editor",
+            message: `${question}`,
+            name: "answer"
+        }
+    ]);
+}
+
 function promptRepo(repoNames) {
     return inquirer.prompt([
         {
@@ -23,23 +33,6 @@ function promptRepo(repoNames) {
         }
     ]);
 }
-
-// function promptPath(){
-//     return inquirer.prompt([
-//         {
-//           type: 'fuzzypath',
-//           name: 'answer',
-//           excludePath: nodePath => nodePath.startsWith('node_modules'),
-//           excludeFilter: nodePath => nodePath == '.',
-//           itemType: 'any',
-//           rootPath: 'app',
-//           message: 'Select a target directory for your component:',
-//           default: 'c:/',
-//           suggestOnly: false,
-//           depthLimit: 5,
-//         }
-//       ]);
-// }
 
 function promptReadmeOptional() {
     return inquirer.prompt([
@@ -78,8 +71,8 @@ async function promptUserGitHub() {
         const { reponame } = await promptRepo(repoNames);
         // prompt user for sections to create, may not want each section all the time
         const readmeOptional = await promptReadmeOptional();
-        // prompt for path to place the readme file. Could use fuzzy path...
-        const { answer: outputPath } = await promptInput("Please enter output path (optional):");//promptPath();//
+        // prompt for path to place the readme file.
+        const { answer: outputPath } = await promptInput("Please enter output path (optional):");
         // combined list of readme for creations
         const readmeSections = ["Description", ...readmeOptional.readmeOptional];
         const userInput = {
@@ -89,28 +82,28 @@ async function promptUserGitHub() {
             outputPath: outputPath
         }
         if (readmeSections.includes("Description")) {
-            const { answer } = await promptInput("Please enter eye catching description:");
-            userInput.Description = answer;
+            const { answer } = await promptInputEditor("Please enter eye catching description:");
+            userInput.Description = answer + " "; 
         }
         if (readmeSections.includes("Installation")) {
-            const { answer } = await promptInput("Please enter steps required to install the project:");
-            userInput.Installation = answer;
+            const { answer } = await promptInputEditor("Please enter steps required to install the project:");
+            userInput.Installation = answer + " ";
         }
         if (readmeSections.includes("Usage")) {
-            const { answer } = await promptInput("Please enter instructions and examples for use:");
-            userInput.Usage = answer;
+            const { answer } = await promptInputEditor("Please enter instructions and examples for use:");
+            userInput.Usage = answer + " ";
         }
         if (readmeSections.includes("License")) {
-            const { answer } = await promptInput("Please enter additional licensing infor (a Badge will be displayed by default):");
-            userInput.License = answer + " "; //spaced added to ensure this section is created.
+            const { answer } = await promptInputEditor("Please enter additional licensing infor (a Badge will be displayed by default):");
+            userInput.License = answer + " ";
         }
         if (readmeSections.includes("Contributing")) {
-            const { answer } = await promptInput("Please enter additional contributing guidelines (a Conventry Badge will be displayed by default):");
-            userInput.Contributing = answer + " "; //spaced added to ensure this section is created.
+            const { answer } = await promptInputEditor("Please enter additional contributing guidelines (a Conventry Badge will be displayed by default):");
+            userInput.Contributing = answer + " ";
         }
         if (readmeSections.includes("Tests")) {
-            const { answer } = await promptInput("Please enter tests for the application and how to run:");
-            userInput.Tests = answer;
+            const { answer } = await promptInputEditor("Please enter tests for the application and how to run:");
+            userInput.Tests = answer + " ";
         }
         return userInput;
     }
