@@ -2,33 +2,22 @@ const inquirer = require("inquirer");
 const axios = require("axios");
 
 async function getInput(question) {
-    const { answer } = await promptInputQuestion(question);
-    if (answer) {
-        const { answer } = await promptInput();
-        return answer + " ";
+    const { singleLine } = await promptInput(question);
+    if (singleLine === "editor") {
+        const { multiLine } = await promptInputEditor();
+        return multiLine + " ";
     }
     else {
-        const { answer } = await promptInputEditor();
-        return answer + " ";
+        return singleLine + " ";
     }
 }
 
-function promptInputQuestion(question) {
-    return inquirer.prompt([
-        {
-            type: "confirm",
-            message: `${question} Single-line (y) Mult-line(n) `,
-            name: "answer",
-        }
-    ]);
-}
-
-function promptInput() {
+function promptInput(question) {
     return inquirer.prompt([
         {
             type: "input",
-            message: "Command line input...",
-            name: "answer"
+            message: `${question} (enter "editor" for multi-line input): `,
+            name: "singleLine"
         }
     ]);
 }
@@ -38,7 +27,7 @@ function promptInputEditor() {
         {
             type: "editor",
             message: "Text editor input...",
-            name: "answer"
+            name: "multiLine"
         }
     ]);
 }

@@ -25,7 +25,7 @@ async function createReadMe() {
                 console.log(`Successfully generated the readme file. \nSee here: ${outputPath}`);
             }
             else {
-                await writeFileAsync("readme.md", readme, "utf8");
+                await writeFileAsync("_README.md", readme, "utf8");
                 console.log("Successfully generated the readme file.");
             }
         }
