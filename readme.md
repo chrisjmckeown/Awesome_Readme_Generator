@@ -8,7 +8,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/chrisjmckeown/Awesome_Readme_Generator?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chrisjmckeown/Awesome_Readme_Generator?style=flat-square)
 [![GitHub contributors](https://img.shields.io/github/contributors/chrisjmckeown/Awesome_Readme_Generator?style=flat-square)](https://GitHub.com/chrisjmckeown/Awesome_Readme_Generator//graphs/contributors/)
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/chrisjmckeown/BandEaR_Discover_live_artists?style=flat-square)](https://GitHub.com/chrisjmckeown/Awesome_Readme_Generator/pull/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/chrisjmckeown/Awesome_Readme_Generator?style=flat-square)](https://GitHub.com/chrisjmckeown/Awesome_Readme_Generator/pull/)
 
 ## Description
 A command-line application that dynamically generates a professional README.md from a user's inputs.
