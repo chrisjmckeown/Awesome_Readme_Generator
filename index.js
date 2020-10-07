@@ -1,5 +1,5 @@
-const getUserInput = require("./get-user-input.js");
-const createReadmeFile = require("./create-readme-file.js");
+const getUserInput = require("./Assets/JS/get-user-input.js");
+const createReadmeFile = require("./Assets/JS/create-readme-file.js");
 const fs = require('fs');
 const util = require('util');
 const path = require('path');

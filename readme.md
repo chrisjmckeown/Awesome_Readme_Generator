@@ -62,6 +62,13 @@ Once installed:
         (Note: my windows PC with Notepad caused an anomaly when using the 'editor' interested to see how you get on.)
 * Once created open the file and make any required modifications, i.e. adding images and personal styling requirements.
 
+### Demonstration
+Click to view the video
+[![SC2 Video](./Assets/Images/Awesome_Readme_Generator_Demo.png)](https://drive.google.com/file/d/1i8v5VGjM_Tf2uhUgM3Bpje6rdlCbiOz-/view)
+
+### Bug
+Notice in the video there are some anomalies, these were only found when using Windows operating system.
+
 ## License
 [![license](https://img.shields.io/github/license/chrisjmckeown/Awesome_Readme_Generator?style=flat-square)](https://github.com/chrisjmckeown/Awesome_Readme_Generator/blob/master/LICENSE)
 
@@ -71,7 +78,10 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4?style=flat-square)](code_of_conduct.md)
 
 ## Tests
-Go the extra mile and write tests for your application. Then provide examples on how to run them.
+Run the application, select the various options avaible, including:
+* Does your email automatically populated base on your GitHub settings (mine does not).
+* Does entering a path work?
+* Test the editor feature, do you find any command line issues?
 
 ## Questions
 * Follow me at: <a href="https://github.com/chrisjmckeown" target="_blank">https://github.com/chrisjmckeown</a>
