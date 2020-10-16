@@ -125,10 +125,10 @@ async function promptUserGitHub() {
             outputPath: outputPath
         }
         if (readmeSections.includes("Description")) {
-            userInput.Description = await getInput("Please enter eye catching description:")
+            userInput.Description = await getInput("Please enter eye catching description:");
         }
         if (readmeSections.includes("Installation")) {
-            userInput.Installation = await getInput("Please enter steps required to install the project:")
+            userInput.Installation = await getInput("Please enter steps required to install the project:");
         }
         if (readmeSections.includes("Usage")) {
             userInput.Usage = await getInput("Please enter instructions and examples for use:");

@@ -44,7 +44,7 @@ A command-line application that dynamically generates a professional README.md f
 
 Once installed:
 * Create a GitHub repo, including a License file and Contributing Covenant to ensure badges work, delete the badges post creation if not required.
-* Run the readme generator using
+* Run the readme generator using:
 ```
    node index.js
 ```
@@ -63,8 +63,8 @@ Once installed:
 * Once created open the file and make any required modifications, i.e. adding images and personal styling requirements.
 
 ### Demonstration
-Click to view the video
-[![SC2 Video](./Assets/Images/Awesome_Readme_Generator_Demo.png)](https://drive.google.com/file/d/1i8v5VGjM_Tf2uhUgM3Bpje6rdlCbiOz-/view)
+Click to view the video:
+[![Video](./Assets/Images/Awesome_Readme_Generator_Demo.png)](https://drive.google.com/file/d/1i8v5VGjM_Tf2uhUgM3Bpje6rdlCbiOz-/view)
 
 ### Bug
 Notice in the video there are some anomalies, these were only found when using Windows operating system.

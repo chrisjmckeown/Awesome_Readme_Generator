@@ -4,7 +4,6 @@ const fs = require('fs');
 const util = require('util');
 const path = require('path');
 const writeFileAsync = util.promisify(fs.writeFile);
-const folderExistsAsync = util.promisify(fs.lstatSync);
 
 function folderExists(outputPath) {
     try {
